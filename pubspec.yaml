@@ -1,7 +1,8 @@
 name: qr_code_tools
 description: QR Code Tools - Flutter plugin.
 version: 0.0.1
-author: AifeiI
+author:
+  - AifeiI <595345150@qq.com>
 homepage: https://github.com/AifeiI/qr_code_tools
 
 environment:
