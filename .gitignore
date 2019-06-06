@@ -1,7 +1,12 @@
 .DS_Store
 .dart_tool/
 
+.metadata
 .packages
 .pub/
 
 build/
+
+pubspec.lock
+res/
+lib/generated/
