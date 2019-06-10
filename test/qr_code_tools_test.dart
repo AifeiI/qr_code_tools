@@ -19,6 +19,6 @@ void main() {
 
   test('from', () async {
     File qrCodeFile = File('../example/images/1559788943.png');
-    expect(await QrCodeToolsPlugin.from(qrCodeFile.path), 'This is TEST');
+    expect(await QrCodeToolsPlugin.decodeFrom(qrCodeFile.path), 'This is TEST');
   });
 }

@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
           }
         })
         .flatMap(
-            (file) => Observable.fromFuture(QrCodeToolsPlugin.from(file.path)))
+            (file) => Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
         .listen((data) {
           setState(() {
             _data = data;
@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _qrcodeFile = file.path;
       });
-      return Observable.fromFuture(QrCodeToolsPlugin.from(file.path));
+      return Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
     }).listen((data) {
       setState(() {
         _data = data;
