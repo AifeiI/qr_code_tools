@@ -33,6 +33,7 @@ import 'package:qr_code_tools/qr_code_tools.dart';
 
 String _data;
 
+/// decode from local file
 Future decode(String file) async {
   String data = await QrCodeToolsPlugin.decodeFrom(file);
   setState(() {
