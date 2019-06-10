@@ -1,5 +1,7 @@
 # QR Code Tools
 
+[![Build Status](https://travis-ci.org/AifeiI/qr_code_tools.svg?branch=master)](https://travis-ci.org/AifeiI/qr_code_tools#)
+
 The Flutter plugin for iOS and Android to decoding QR codes.
 
 ## Installation

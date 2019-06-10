@@ -12,3 +12,4 @@ build/
 pubspec.lock
 res/
 lib/generated/
+lib/*.jar
