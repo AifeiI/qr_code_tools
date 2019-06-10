@@ -34,7 +34,7 @@ import 'package:qr_code_tools/qr_code_tools.dart';
 String _data;
 
 Future decode(String file) async {
-  String data = await QrCodeToolsPlugin.from(file);
+  String data = await QrCodeToolsPlugin.decodeFrom(file);
   setState(() {
     _data = data;
   });
