@@ -7,9 +7,8 @@ class QrCodeToolsPlugin {
 
   /// [filePath] is local file path
   static Future<String> decodeFrom(String filePath) async {
-    final String data = await _channel.invokeMethod('decoder', {'file': filePath});
+    final String data =
+        await _channel.invokeMethod('decoder', {'file': filePath});
     return data;
   }
-
-
 }
