@@ -1,0 +1,34 @@
+PODS:
+  - Flutter (1.0.0)
+  - image_picker (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - qr_code_tools (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - qr_code_tools (from `.symlinks/plugins/qr_code_tools/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  qr_code_tools:
+    :path: ".symlinks/plugins/qr_code_tools/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  qr_code_tools: 262e0fe2bc898b16cfb3abd01a3a4c11dac10eb4
+
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+
+COCOAPODS: 1.8.4

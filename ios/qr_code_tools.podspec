@@ -4,6 +4,7 @@
 Pod::Spec.new do |s|
   s.name             = 'qr_code_tools'
   s.version          = '0.0.1'
+  s.swift_version    = '4.0'
   s.summary          = 'A new Flutter plugin.'
   s.description      = <<-DESC
 A new Flutter plugin.
