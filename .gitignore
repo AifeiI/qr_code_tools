@@ -13,3 +13,5 @@ pubspec.lock
 res/
 lib/generated/
 lib/*.jar
+
+example/.flutter-plugins-dependencies

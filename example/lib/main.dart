@@ -23,21 +23,20 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     String filename = '1559788943.png';
-    Observable.fromFuture(getTemporaryDirectory())
+    Stream.fromFuture(getTemporaryDirectory())
         .flatMap((tempDir) {
           File qrCodeFile = File('${tempDir.path}/$filename');
           bool exists = qrCodeFile.existsSync();
           if (exists) {
-            return Observable.just(qrCodeFile);
+            return Stream.value(qrCodeFile);
           } else {
-            return Observable.fromFuture(rootBundle.load("images/$filename"))
-                .flatMap((bytes) => Observable.fromFuture(
-                    qrCodeFile.writeAsBytes(bytes.buffer.asUint8List(
-                        bytes.offsetInBytes, bytes.lengthInBytes))));
+            return Stream.fromFuture(rootBundle.load("images/$filename")).flatMap(
+                (bytes) => Stream.fromFuture(qrCodeFile.writeAsBytes(bytes.buffer
+                    .asUint8List(bytes.offsetInBytes, bytes.lengthInBytes))));
           }
         })
         .flatMap(
-            (file) => Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
+            (file) => Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
         .listen((data) {
           setState(() {
             _data = data;
@@ -73,12 +72,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _getPhotoByGallery() {
-    Observable.fromFuture(ImagePicker.pickImage(source: ImageSource.gallery))
+    Stream.fromFuture(ImagePicker.pickImage(source: ImageSource.gallery))
         .flatMap((file) {
       setState(() {
         _qrcodeFile = file.path;
       });
-      return Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
+      return Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
     }).listen((data) {
       setState(() {
         _data = data;
