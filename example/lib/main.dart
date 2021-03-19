@@ -53,20 +53,22 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              _qrcodeFile.isEmpty
-                  ? Image.asset(
-                      'images/1559788943.png',
-                    )
-                  : Image.file(File(_qrcodeFile)),
-              ElevatedButton(
-                child: Text("Select file"),
-                onPressed: _getPhotoByGallery,
-              ),
-              Text('Qr Code data: $_data\n'),
-            ],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                _qrcodeFile.isEmpty
+                    ? Image.asset(
+                        'images/1559788943.png',
+                      )
+                    : Image.file(File(_qrcodeFile)),
+                ElevatedButton(
+                  child: Text("Select file"),
+                  onPressed: _getPhotoByGallery,
+                ),
+                Text('Qr Code data: $_data\n'),
+              ],
+            ),
           ),
         ),
       ),
