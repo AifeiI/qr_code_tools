@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Update Flutter SDK to 2.0
+
 ## 0.0.6
 
 * Update readme

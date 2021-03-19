@@ -7,6 +7,8 @@ import 'package:qr_code_tools/qr_code_tools.dart';
 void main() {
   const MethodChannel channel = MethodChannel('qr_code_tools');
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       return 'This is TEST';

@@ -15,6 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final picker = ImagePicker();
   String _qrcodeFile = '';
   String _data = '';
 
@@ -23,21 +24,21 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     String filename = '1559788943.png';
-    Observable.fromFuture(getTemporaryDirectory())
+    Stream.fromFuture(getTemporaryDirectory())
         .flatMap((tempDir) {
           File qrCodeFile = File('${tempDir.path}/$filename');
           bool exists = qrCodeFile.existsSync();
           if (exists) {
-            return Observable.just(qrCodeFile);
+            return Stream.value(qrCodeFile);
           } else {
-            return Observable.fromFuture(rootBundle.load("images/$filename"))
-                .flatMap((bytes) => Observable.fromFuture(
-                    qrCodeFile.writeAsBytes(bytes.buffer.asUint8List(
+            return Stream.fromFuture(rootBundle.load("images/$filename"))
+                .flatMap((bytes) => Stream.fromFuture(qrCodeFile.writeAsBytes(
+                    bytes.buffer.asUint8List(
                         bytes.offsetInBytes, bytes.lengthInBytes))));
           }
         })
-        .flatMap(
-            (file) => Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
+        .flatMap((file) =>
+            Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
         .listen((data) {
           setState(() {
             _data = data;
@@ -60,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                       'images/1559788943.png',
                     )
                   : Image.file(File(_qrcodeFile)),
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Select file"),
                 onPressed: _getPhotoByGallery,
               ),
@@ -73,12 +74,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _getPhotoByGallery() {
-    Observable.fromFuture(ImagePicker.pickImage(source: ImageSource.gallery))
+    Stream.fromFuture(picker.getImage(source: ImageSource.gallery))
         .flatMap((file) {
       setState(() {
         _qrcodeFile = file.path;
       });
-      return Observable.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
+      return Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
     }).listen((data) {
       setState(() {
         _data = data;
