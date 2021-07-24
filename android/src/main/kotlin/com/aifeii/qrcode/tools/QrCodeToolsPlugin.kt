@@ -13,6 +13,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.util.*
 import kotlin.collections.ArrayList
+import android.graphics.Bitmap
 
 class QrCodeToolsPlugin : FlutterPlugin, MethodCallHandler {
 
@@ -31,16 +32,38 @@ class QrCodeToolsPlugin : FlutterPlugin, MethodCallHandler {
         if (call.method == "decoder") {
             val filePath = call.argument<String>("file")
             val file = File(filePath)
+            var maxWidth:Int = 5616;
+            var maxHeight:Int = 3744;
+            var w:Int;
+            var h:Int;
+            var bitmap:Bitmap;
+            
             if (!file.exists()) {
                 result.error("File not found. filePath: $filePath", null, null)
                 return
             }
 
             val fis = FileInputStream(file)
-            val bitmap = BitmapFactory.decodeStream(fis)
+            bitmap = BitmapFactory.decodeStream(fis)
+            w = bitmap.width
+            h = bitmap.height
 
-            val w = bitmap.width
-            val h = bitmap.height
+            if((w*h) > (maxWidth*maxHeight))
+            {
+                val scale : Float;
+                if(w >= h)
+                {
+                    scale = maxWidth.toFloat()/w.toFloat()
+                    w = maxWidth
+                    h = (h*scale).toInt();
+                } else {
+                    scale = maxHeight.toFloat()/ h.toFloat();
+                    h = maxHeight;
+                    w = (w*scale).toInt();
+                }
+                bitmap = Bitmap.createScaledBitmap(bitmap, w, h, false);
+            }
+            
             val pixels = IntArray(w * h)
             bitmap.getPixels(pixels, 0, w, 0, 0, w, h)
             val source = RGBLuminanceSource(bitmap.width, bitmap.height, pixels)
