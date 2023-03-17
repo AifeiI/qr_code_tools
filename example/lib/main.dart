@@ -57,10 +57,12 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: <Widget>[
               _qrcodeFile.isEmpty
-                  ? Image.asset(
-                      'images/1559788943.png',
-                    )
-                  : Image.file(File(_qrcodeFile)),
+                  ? Expanded(
+                child: Image.asset(
+                        'images/1559788943.png',
+                      ),
+                  )
+                  : Expanded(child: Image.file(File(_qrcodeFile))),
               ElevatedButton(
                 child: Text("Select file"),
                 onPressed: _getPhotoByGallery,
@@ -73,8 +75,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _getPhotoByGallery() {
-    Stream.fromFuture(picker.getImage(source: ImageSource.gallery))
+  Future<void> _getPhotoByGallery() async {
+    Stream.fromFuture(picker.pickImage(source: ImageSource.gallery))
         .flatMap((file) {
       setState(() {
         _qrcodeFile = file.path;
