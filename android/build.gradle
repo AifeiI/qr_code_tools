@@ -30,14 +30,14 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     defaultConfig {
         minSdkVersion 21
     }
 }
 
 dependencies {
-    implementation "com.google.zxing:core:3.3.0"
-    implementation "com.google.zxing:javase:3.3.0"
+    implementation "com.google.zxing:core:3.3.3"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
