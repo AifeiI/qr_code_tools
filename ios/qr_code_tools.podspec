@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'qr_code_tools'
-  s.version          = '0.0.7'
+  s.version          = '0.1.0'
   s.summary          = 'The Flutter plugin for iOS to decoding QR codes.'
   s.description      = <<-DESC
 A new Flutter plugin.

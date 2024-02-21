@@ -1,9 +1,10 @@
 name: qr_code_tools_example
 description: Demonstrates how to use the qr_code_tools plugin.
 publish_to: 'none'
+version: 1.0.0
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,7 +19,6 @@ dependencies:
 
   path_provider:
   path:
-  rxdart:
   image_picker:
 
 dev_dependencies:

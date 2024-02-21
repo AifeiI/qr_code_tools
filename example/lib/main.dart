@@ -5,7 +5,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_tools/qr_code_tools.dart';
-import 'package:rxdart/rxdart.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,24 +23,26 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     String filename = '1559788943.png';
-    Stream.fromFuture(getTemporaryDirectory())
-        .flatMap((tempDir) {
-          File qrCodeFile = File('${tempDir.path}/$filename');
-          bool exists = qrCodeFile.existsSync();
-          if (exists) {
-            return Stream.value(qrCodeFile);
-          } else {
-            return Stream.fromFuture(rootBundle.load("images/$filename"))
-                .flatMap((bytes) => Stream.fromFuture(qrCodeFile.writeAsBytes(
-                    bytes.buffer.asUint8List(
-                        bytes.offsetInBytes, bytes.lengthInBytes))));
-          }
-        })
-        .flatMap((file) =>
-            Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path)))
-        .listen((data) {
+    getTemporaryDirectory()
+        .then((dir) => File('${dir.path}/$filename'))
+        .then((file) => file.existsSync()
+            ? Future.value(file)
+            : rootBundle
+                .load("images/$filename")
+                .then((bytes) => file.writeAsBytes(bytes.buffer.asUint8List())))
+        .then((file) {
           setState(() {
-            _data = data;
+            _qrcodeFile = file.path;
+          });
+          return file;
+        })
+        .then((file) => decodeQR(file.path))
+        .then((data) {
+          setState(() => _data = 'Decode is failed');
+        })
+        .catchError((e) {
+          setState(() {
+            _data = 'Failed to load this file';
           });
         });
   }
@@ -74,21 +75,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _getPhotoByGallery() {
-    Stream.fromFuture(picker.getImage(source: ImageSource.gallery))
-        .flatMap((file) {
-      setState(() {
-        _qrcodeFile = file.path;
-      });
-      return Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file.path));
-    }).listen((data) {
-      setState(() {
-        _data = data;
-      });
-    }).onError((error, stackTrace) {
-      setState(() {
-        _data = '';
-      });
-      print('${error.toString()}');
+    picker
+        .pickImage(source: ImageSource.gallery)
+        .then((xfile) => xfile?.path)
+        .then((path) {
+      if (path != null) {
+        setState(() {
+          _qrcodeFile = path;
+        });
+        decodeQR(path).then((data) => setState(() => _data = data ?? 'Decode is failed'));
+      } else {
+        setState(() {
+          _data = 'Failed to load this file';
+        });
+      }
     });
+  }
+
+  Future<String?> decodeQR(String filePath) {
+    return QrCodeToolsPlugin.decodeFrom(filePath);
   }
 }
