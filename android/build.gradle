@@ -56,15 +56,3 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
-
-testOptions {
-    unitTests.all {
-        useJUnitPlatform()
-
-        testLogging {
-            events "passed", "skipped", "failed", "standardOut", "standardError"
-            outputs.upToDateWhen {false}
-            showStandardStreams = true
-        }
-    }
-}
