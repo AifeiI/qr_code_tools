@@ -2,7 +2,7 @@ group 'com.aifeii.qrcode.tools'
 version '0.1.0'
 
 buildscript {
-    ext.kotlin_version = '1.4.31'
+    ext.kotlin_version = '1.5.20'
     repositories {
         google()
         jcenter()
