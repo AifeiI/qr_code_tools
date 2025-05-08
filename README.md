@@ -1,9 +1,13 @@
-# QR Code Tools
+# Custom QR Code Tools fork
 
-[![Build Status](https://travis-ci.org/AifeiI/qr_code_tools.svg?branch=master)](https://travis-ci.org/AifeiI/qr_code_tools)
-[![pub package](https://img.shields.io/pub/v/qr_code_tools.svg)](https://travis-ci.org/AifeiI/qr_code_tools)
+Fork of the Flutter dependency `qr_code_tools` for the FOX Live Valve/Transfer Neo mobile application.
 
-The Flutter plugin for iOS and Android to decoding QR codes.
+This fork was created to address an issue with version `0.1.0` of the `qr_code_tools` package.
+
+The change implemented into this branch was adding a `namespace` value of `com.aifeii.qrcode.tools` to `android/build.gradle` as it is now required to run dependencies, which the release version is lacking. 
+
+To learn more about this plugin and check on releases that should fix this issue check out their pub.dev [![page](https://pub.dev/packages/qr_code_tools)](https://travis-ci.org/AifeiI/qr_code_tools)
+
 
 ## Installation
 
