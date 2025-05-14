@@ -1,7 +1,7 @@
 name: qr_code_tools_example
-description: Demonstrates how to use the qr_code_tools plugin.
+description: "Demonstrates how to use the qr_code_tools plugin."
 publish_to: 'none'
-version: 1.0.0
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -17,13 +17,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  path_provider:
-  path:
-  image_picker:
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

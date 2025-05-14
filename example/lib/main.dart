@@ -6,11 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_tools/qr_code_tools.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -38,7 +40,9 @@ class _MyAppState extends State<MyApp> {
         })
         .then((file) => decodeQR(file.path))
         .then((data) {
-          setState(() => _data = 'Decode is failed');
+          setState(() {
+            _data = data ?? 'Decode is failed';
+          });
         })
         .catchError((e) {
           setState(() {
@@ -63,8 +67,8 @@ class _MyAppState extends State<MyApp> {
                     )
                   : Image.file(File(_qrcodeFile)),
               ElevatedButton(
-                child: Text("Select file"),
                 onPressed: _getPhotoByGallery,
+                child: const Text("Select file"),
               ),
               Text('Qr Code data: $_data\n'),
             ],

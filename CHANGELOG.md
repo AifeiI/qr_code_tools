@@ -1,3 +1,10 @@
+## 0.2.0
+
+* Update:
+  - Support AGP 8.0+
+  - Support Kotlin 1.8+
+  - ZXing 3.5+
+
 ## 0.1.0
 
 * Update Flutter SDK to 3.0.+
