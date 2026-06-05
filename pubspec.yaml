@@ -1,11 +1,11 @@
 name: qr_code_tools
 description: The Flutter plugin for iOS and Android to decoding QR codes.
-version: 0.2.0
+version: 0.3.0
 homepage: https://github.com/AifeiI/qr_code_tools
 
 environment:
-  sdk: ">=2.19.0 <4.0.0"
-  flutter: ">=1.17.0"
+  sdk: ^3.11.0
+  flutter: ">=3.41.0"
 
 dependencies:
   flutter:

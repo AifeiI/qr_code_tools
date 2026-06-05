@@ -13,7 +13,7 @@ A new Flutter plugin.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'AifeiI' => '595345150@qq.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'qr_code_tools/Sources/qr_code_tools/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
 
